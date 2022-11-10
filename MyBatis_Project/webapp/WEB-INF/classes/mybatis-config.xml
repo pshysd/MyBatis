@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+ <!-- 
+  		이 문서의 형식이 configuration(==환경설정)임을 알려줌
+  		-> configuration 태그가 전체를 감싸고 있음
+  		
+  		DTD : 유효성을 체크해주는 역할
+  			  즉, 과연 이 문서 내부의 태그들이 configuration 태그 내의 하위 요소로 존재해도 되는지 문법적인 체크를 해줌
+ -->
+<configuration>
+ <!-- settings: myBatis 구동 시 선언할 설정들을 작성하는 영역 -->
+	<settings>
+ <!-- jdbcTypeForNull: 만약 null로 데이터가 전달되었다면 DB단에서 빈 칸이 아닌 NULL로 인식하겠다. (무조건 대문자 NULL로 작성) -->
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+ <!-- 
+	typeAliases: VO / DTO 클래스들의 풀 클래스 명을 단순한 클래스 명으로 사용하기 위해서 별칭을 등록할 수 있는 영역 -
+				 아직 생성하지 않은 VO / DTO 클래스를 별칭 지정할 경우 ClassNotFoundException 발생
+ -->
+	<typeAliases>
+	</typeAliases>
+
+ <!-- 
+	environments: MyBatis에서 연동할 DB들의 정보를 등록하는 영역
+				 (여러 개의 DB 정보를 등록 가능 -> 구분하기 위해 각각 id 속성을 부여)
+				 default 속성으로 여러 개의 DB 정보들 중 어떤 DB를 메인 DB로 쓸 것인지 id 값을 명시해줘야 한다.
+ -->
+		<environments default="development">
+			<environment id="development">
+ <!-- 
+	* transactionManager: JDBC / MANAGED
+						- JDBC: 트랜잭션을 내가 직접 관리하겠다. (수동 COMMIT)
+						- MANAGED: 개발자가 트랜잭션에 대해서 어떠한 영향도 행사하지 않겠다. (자동 COMMIT)
+-->
+				<transactionManager type="JDBC" />
+ <!-- 
+	*dataSource: POOLED / UNPOOLED
+				 Connection 객체를 담아둘 수 있는 Connection Pool 사용 여부
+				 (Connection Pool: 한번 생성된 Connection 객체를 담아두면 재사용해서 쓸 수 있음)
+				 - POOLED: Connection Pool을 사용하겠다. Connection 객체를 재사용하겠다.
+				 - UNPOOLED: Connection Pool을 사용하지 않겠다. 매 요청마다 Connection 객체를 사용하겠다.
+ -->
+				<dataSource type="POOLED">
+					<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+					<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+					<property name="username" value="MYBATIS" />
+					<property name="password" value="MYBATIS" />
+				</dataSource>
+			</environment>
+		</environments>
+		
+ <!-- 
+	mappers : 실행할 sql문들을 기록해둔 mapper 파일들을 등록하는 영역
+			  아직 mapper 파일을 생성하지 않은 상태에서 mapper 설정을 하게되면 FileNotFoundException 발생 
+ -->
+ 
+</configuration>
