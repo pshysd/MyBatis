@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+<!-- namespace: 해당 mapper 파일의 고유한 별칭 <- alias -->
+	
+<!-- 
+	* DML(INSERT, UPDATE, DELETE)일 경우
+	<insert id="각 sql문들의 식별자" 
+			parameterType="전달받은자바타입(풀클래스명)혹은별칭">
+		쿼리문 작성
+	</insert>
+	
+	<update></update>
+	<delete></delete>
+	
+	-> parameterType 속성은 전달받을 값이 없다면 생략 가능 (완성된 쿼리문일 경우)
+	-> update, delete 태그도 마찬가지
+	-> 기존의 ? 대신에 해당 sql 문에 전달된 객체로부터 값을 꺼낼 때
+		#{필드명}을 이용 (내부적으로 해당 getter 메소드가 호출된 꼴)
+		단일 변수값으로 구멍을 메꿀 경우 #{매개변수명}
+		HashMap에 담긴 값으로 구멍을 메꿀 경우 #{키값}
+	-> DML문의 경우 어차피 실행 결과가 처리된 행의 갯수 (int)이기 때문에
+		resultType또는resultMap에 대한 속성을 안써도 됨
+-->
+	<!-- 
+	별칭 지정 전
+	<insert id="insertMember" 
+			parameterType="com.kh.mybatis.member.model.vo.Member">
+	 -->
+	<insert id="insertMember" parameterType="member">
+	INSERT INTO MEMBER (USER_NO,
+                    USER_ID,
+                    USER_PWD,
+                    USER_NAME,
+                    EMAIL,
+                    BIRTHDAY,
+                    GENDER,
+                    PHONE,
+                    ADDRESS)
+            VALUES (SEQ_UNO.NEXTVAL,
+                    #{userId},
+                    #{userPwd},
+                    #{userName},
+                    #{email},
+                    #{birthday},
+                    #{gender},
+                    #{phone},
+                    #{address})
+	</insert>
+	
+	<!-- 
+		* SELECT일 경우
+		<select id="각 sql문의 식별자" 
+				parameterType="com.kh.mybatis.member.model.vo.Member (alias 설정했으면 alias)"
+				resultType="조회결과반환타입(자바)" ex) int, String, Object, Date, ... 
+				또는
+				resultMap="조회결과를매핑할resultMap의 id">
+			쿼리문 작성
+		</select>
+		-> parameterType은 완성된 쿼리문일 경우 작성할 필요 x (위치홀더 채우는 속성)
+		-> select 태그의 경우 반드시 resultType(자바에서 제공하는 자료형) 
+									 또는
+									 resultMap(내가 만든 VO 클래스 타입)으로 결과 값에 대한 타입 지정
+	 -->
+	 <select id="loginMember" parameterType="member" resultType="">
+	 SELECT *
+	 FROM MEMBER
+	 WHERE USER_ID = #{userId}
+	 AND   USER_PWD = #{userPwd}
+	 AND STATUS = 'Y'
+	 </select>
+</mapper>

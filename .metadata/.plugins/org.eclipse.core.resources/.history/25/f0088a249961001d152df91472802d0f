@@ -1,0 +1,56 @@
+package com.kh.mybatis.member.model.service;
+
+import org.apache.ibatis.session.SqlSession;
+
+import static com.kh.mybatis.common.template.Template.*;
+import static org.apache.ibatis.session.SqlSession.*;
+import com.kh.mybatis.member.model.dao.MemberDao;
+import com.kh.mybatis.member.model.vo.Member;
+
+public class MemberServiceImpl implements MemberService {
+
+	@Override
+	public int insertMember(Member m) {
+
+		SqlSession sqlSession = getSqlSession();
+
+		int result = new MemberDao().insertMember(sqlSession, m);
+		
+		if(result > 0 ) {
+			sqlSession.commit();
+		}else {
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+	@Override
+	public Member loginMember(Member m) {
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		Member loginUser = new MemberDao().loginMember(sqlSession, m);
+		
+		sqlSession.close();
+		
+		return loginUser;
+	}
+
+	@Override
+	public int updateMember(Member m) {
+		return 0;
+	}
+
+	@Override
+	public int deleteMember(Member m) {
+		return 0;
+	}
+
+	@Override
+	public int idCheck(String checkId) {
+		return 0;
+	}
+}

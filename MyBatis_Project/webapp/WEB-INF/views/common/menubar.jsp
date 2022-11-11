@@ -53,17 +53,20 @@
     
     <div class="login-area" align="right">
     <c:choose>
-        <c:when test="${true}">
+        <c:when test="${empty loginUser}">
             <!-- 로그인 전에 보여지는 로그인 폼 -->
-            <form action="" method="post">
+            <!-- 
+            	현재 나의 url: http://localhost:8888/my/
+            	로그인 요청시 보낼 url : http://localhost:8888/my/login.me
+            	
+            	절대경로: /my/login.me
+            	상대경로: login.me
+            -->
+            <form action="login.me" method="post">
             <table>
                 <tr>
-                    <td>
-                        아이디
-                    </td>
-                    <td>
-                        <input type="text" name="userId" required>
-                    </td>
+                    <td>아이디</td>
+                    <td><input type="text" name="userId" required> </td>
                     <td rowspan="2">
                         <button type="submit" style="height:50px">로그인</button>
                     </td>
@@ -88,7 +91,7 @@
                 <table>
                     <tr>
                         <td colspan="2">
-                            <h3>님 환영합니다.</h3>
+                            <h3>${loginUser.userName}님 환영합니다.</h3>
                         </td>
                     </tr>
                     <tr>

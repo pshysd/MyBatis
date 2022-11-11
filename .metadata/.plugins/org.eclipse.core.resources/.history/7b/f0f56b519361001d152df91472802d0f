@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+<!-- namespace: 해당 mapper 파일의 고유한 별칭 <- alias -->
+	
+<!-- 
+	* DML(INSERT, UPDATE, DELETE)일 경우
+	<insert id="각 sql문들의 식별자" parameterType="전달받은자바타입(풀클래스명)혹은별칭">
+		쿼리문 작성
+	</insert>
+	
+	<update></update>
+	<delete></delete>
+	
+	-> parameterType 속성은 전달받을 값이 없다면 생략 가능 (완성된 쿼리문일 경우)
+	-> update, delete 태그도 마찬가지
+-->
+	<!-- 
+	별칭 지정 전
+	<insert id="insertMember" parameterType="com.kh.mybatis.member.model.vo.Member">
+	 -->
+	<insert id="insertMember" parameterType="member">
+	INSERT INTO MEMBER (USER_NO,
+                    USER_ID,
+                    USER_PWD,
+                    USER_NAME,
+                    EMAIL,
+                    BIRTHDAY,
+                    GENDER,
+                    PHONE,
+                    ADDRESS)
+            VALUES (SEQ_UNO.NEXTVAL,
+                    #{userId},
+                    #{userPwd},
+                    #{userName},
+                    #{email},
+                    #{birthday},
+                    #{gender},
+                    #{phone},
+                    #{address})
+	</insert>
+</mapper>
