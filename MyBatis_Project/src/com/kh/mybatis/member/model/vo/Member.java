@@ -13,15 +13,15 @@ public class Member {
 	private String gender;
 	private String phone;
 	private String address;
-	private Date enroll_date;
-	private Date modify_date;
+	private Date enrollDate;
+	private Date modifyDate;
 	private String status;
 
 	public Member() {
 	}
 
 	public Member(int userNo, String userId, String userPwd, String userName, String email, String birthday,
-			String gender, String phone, String address, Date enroll_date, Date modify_date, String status) {
+			String gender, String phone, String address, Date enrollDate, Date modifyDate, String status) {
 		this.userNo = userNo;
 		this.userId = userId;
 		this.userPwd = userPwd;
@@ -31,8 +31,8 @@ public class Member {
 		this.gender = gender;
 		this.phone = phone;
 		this.address = address;
-		this.enroll_date = enroll_date;
-		this.modify_date = modify_date;
+		this.enrollDate = enrollDate;
+		this.modifyDate = modifyDate;
 		this.status = status;
 	}
 
@@ -121,20 +121,20 @@ public class Member {
 		this.address = address;
 	}
 
-	public Date getEnroll_date() {
-		return enroll_date;
+	public Date getEnrollDate() {
+		return enrollDate;
 	}
 
-	public void setEnroll_date(Date enroll_date) {
-		this.enroll_date = enroll_date;
+	public void setEnrollDate(Date enrollDate) {
+		this.enrollDate = enrollDate;
 	}
 
-	public Date getModify_date() {
-		return modify_date;
+	public Date getModifyDate() {
+		return modifyDate;
 	}
 
-	public void setModify_date(Date modify_date) {
-		this.modify_date = modify_date;
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
 	}
 
 	public String getStatus() {
@@ -149,7 +149,7 @@ public class Member {
 	public String toString() {
 		return "Member [userNo=" + userNo + ", userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName
 				+ ", email=" + email + ", birthday=" + birthday + ", gender=" + gender + ", phone=" + phone
-				+ ", address=" + address + ", enroll_date=" + enroll_date + ", modify_date=" + modify_date + ", status="
+				+ ", address=" + address + ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", status="
 				+ status + "]";
 	}
 }
