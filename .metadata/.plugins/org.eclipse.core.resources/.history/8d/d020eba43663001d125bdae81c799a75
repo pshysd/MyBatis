@@ -48,13 +48,14 @@ public class MemberInsertController extends HttpServlet {
 //		서비스로 VO 객체를 넘겨서 요청 후 결과 받기
 		int result = new MemberServiceImpl().insertMember(m);
 		
-		if(result > 0) { // 성공 -> 메인페이지로 url 재요청
+		if(result > 0) {
 			request.setAttribute("alertMsg", "성공");
 			response.sendRedirect(request.getContextPath());
-		}else { // 실패 -> 에러문구를 담아서 에러페이지로 포워딩
-			request.setAttribute("errorMsg", "회원가입 실패");
+		}else {
+			request.getSession().setAttribute("errorMsg", "실패");
 			request.getRequestDispatcher("WEB-INF/views/common/errorPage.jsp").forward(request, response);
 		}
+		
 	}
 	
 	/**

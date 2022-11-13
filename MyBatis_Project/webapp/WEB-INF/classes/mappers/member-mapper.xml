@@ -58,7 +58,7 @@
 		resultType또는resultMap에 대한 속성을 안써도 됨
 -->
 	<!-- 
-	별칭 지정 전
+	별칭 지정 전 (풀 클래스명)
 	<insert id="insertMember" 
 			parameterType="com.kh.mybatis.member.model.vo.Member">
 	 -->
