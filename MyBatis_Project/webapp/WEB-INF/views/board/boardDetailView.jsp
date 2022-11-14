@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import=
-"com.kh.mybatis.board.model.vo.Board,
-com.kh.mybatis.board.model.vo.Reply,
-java.util.ArrayList" %>
 <% 
 %>
 <!DOCTYPE html>
@@ -83,6 +79,15 @@ java.util.ArrayList" %>
                 </c:otherwise>
             </c:choose>
         </table>
+        
+        <br><br>
+
+        <c:if test="${!empty loginUser and loginUser.userId eq b.boardWriter}">
+            <div align="center">
+                <button type="button" onclick="location.href='updateForm.bo?boardNo=${b.boardNo}'">수정하기</button>
+                <button type="button" onclick="location.href='delete.bo'">삭제하기</button>
+            </div>
+        </c:if>
     </div>
 </body>
 </html>
