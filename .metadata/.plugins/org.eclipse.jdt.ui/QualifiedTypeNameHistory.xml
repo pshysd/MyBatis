@@ -12,9 +12,12 @@
 <fullyQualifiedTypeName name="com.kh.mybatis.member.model.vo.Member"/>
 <fullyQualifiedTypeName name="com.kh.mybatis.member.model.service.MemberServiceImpl"/>
 <fullyQualifiedTypeName name="com.kh.mybatis.member.model.dao.MemberDao"/>
-<fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSession"/>
-<fullyQualifiedTypeName name="com.kh.mybatis.common.template.Template"/>
 <fullyQualifiedTypeName name="java.sql.Date"/>
 <fullyQualifiedTypeName name="com.kh.mybatis.board.model.service.BoardService"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="com.kh.mybatis.common.model.vo.PageInfo"/>
+<fullyQualifiedTypeName name="com.kh.mybatis.common.template.Pagination"/>
+<fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSession"/>
+<fullyQualifiedTypeName name="com.kh.mybatis.board.model.dao.BoardDao"/>
+<fullyQualifiedTypeName name="com.kh.mybatis.common.template.Template"/>
 </qualifiedTypeNameHistroy>

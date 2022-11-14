@@ -1,0 +1,36 @@
+package com.kh.mybatis.board.model.dao;
+
+import java.util.ArrayList;
+
+import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
+
+import com.kh.mybatis.board.model.vo.Board;
+import com.kh.mybatis.common.model.vo.PageInfo;
+
+public class BoardDao {
+
+	public int selectListCount(SqlSession sqlSession) {
+		
+		return sqlSession.selectOne("boardMapper.selectListCount");
+	}
+
+	public ArrayList<Board> selectList(SqlSession sqlSession, PageInfo pi) {
+		
+		int limit = pi.getBoardLimit();
+		int offset = (pi.getCurrentPage()-1)*limit;
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+//		selectList 메소드 호출 시 RowBOuntds 객체를 넘겨야 할 경우
+//		selectList 메소드의 오버로딩된 형태 중 매개 변수가 3개인 메소드를 호출해야만 함
+//		-> 두번째 매개 변수 == 쿼리문을 완성시키기 위한 데이터 값
+//		* 주의할 점
+//		딱히 두번째 매개 변수 자리에 넘길 값이 없다면 null을 넘긴다.
+		return (ArrayList)sqlSession.selectList("boardMapper.selectList",null,rowBounds);
+	}
+
+	public int increaseCount(SqlSession sqlSession, int boardNo) {
+		return sqlSession.update("boardMapper.increaseCount",boardNo);
+	}
+}

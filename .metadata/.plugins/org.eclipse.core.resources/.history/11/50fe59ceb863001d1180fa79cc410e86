@@ -1,0 +1,50 @@
+package com.kh.mybatis.board.model.service;
+
+import java.util.ArrayList;
+
+import org.apache.ibatis.session.SqlSession;
+import static com.kh.mybatis.common.template.*;
+
+import com.kh.mybatis.board.model.dao.BoardDao;
+import com.kh.mybatis.board.model.vo.Board;
+import com.kh.mybatis.common.model.vo.PageInfo;
+import com.kh.mybatis.common.template.Template;
+
+public class BoardServiceImpl implements BoardService {
+
+	private BoardDao boardDao = new BoardDao();
+	@Override
+	public int selectListCount() {
+		
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result =boardDao.selectListCount(sqlSession);
+		
+		return result;
+	}
+
+	@Override
+	public ArrayList<Board> selectList(PageInfo pi) {
+		return null;
+	}
+
+	@Override
+	public int increaseCount(int boardNo) {
+		return 0;
+	}
+
+	@Override
+	public Board selectBoard(int boardNo) {
+		return null;
+	}
+
+	@Override
+	public int insertBoard(Board b) {
+		return 0;
+	}
+
+	@Override
+	public int updateBoard(Board b) {
+		return 0;
+	}
+}

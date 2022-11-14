@@ -1,0 +1,79 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="com.kh.mybatis.board.model.vo.Board, com.kh.mybatis.board.model.vo.Reply"%>
+<% 
+	Board b = (Board)request.getAttribute("b"); 
+	Reply r = (Reply)request.getAttribute("r");
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+    td>textarea {
+        width: 100px;
+        height: 100px;
+        resize: none;
+        box-sizing: border-box;
+    }
+</style>
+</head>
+<body>
+
+    <jsp:include page="../common/menubar.jsp" />
+
+    <div class="outer">
+        <br>
+        <h1 align="center">게시판 상세조회</h1>
+        <br>
+
+        <table align="center" border="1">
+            <tr>
+                <td width="100">글번호</td>
+                <td width="500">10</td>
+            </tr>
+            <tr>
+                <td>제목</td>
+                <td>${b.boardTitle}</td>
+            </tr>
+            <tr>
+                <td>작성자</td>
+                <td>user01</td>
+            </tr>
+            <tr>
+                <td>조회수</td>
+                <td>430</td>
+            </tr>
+            <tr>
+                <td>작성일</td>
+                <td>2022-11-14</td>
+            </tr>
+            <tr>
+                <td>내용</td>
+                <td height="100">내용이 들어갈 자리</td>
+            </tr>
+        </table>
+
+        <table align="center" border="1">
+            <tr>
+                <td width="100">댓글 작성</td>
+                <td width="400"><textarea cols="30" rows="10" required placeholder="댓글을 입력해주세요."></textarea></td>
+                <td width="100"><button>등록</button></td>
+            </tr>
+            <tr>
+                <td colspan="3"><b>댓글(2)</b></td>
+            </tr>
+            <tr>
+                <td>admin</td>
+                <td>우와 재밌네요</td>
+                <td>2022-11-14</td>                 
+            </tr>
+            <tr>
+                <td>user01</td>
+                <td>ㄷㄷ</td>                                                                                                                                               
+                <td>2022-11-14</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

@@ -3,6 +3,7 @@ package com.kh.mybatis.board.model.service;
 import java.util.ArrayList;
 
 import com.kh.mybatis.board.model.vo.Board;
+import com.kh.mybatis.board.model.vo.Reply;
 import com.kh.mybatis.common.model.vo.PageInfo;
 
 public interface BoardService {
@@ -17,9 +18,14 @@ public interface BoardService {
 
 	Board selectBoard(int boardNo);
 
+//	댓글 조회
+	ArrayList<Reply> selectReplyList(int boardNo);
+	
 //	게시글 작성
 	int insertBoard(Board b);
 
 //	게시글 수정
 	int updateBoard(Board b);
+	
+
 }
