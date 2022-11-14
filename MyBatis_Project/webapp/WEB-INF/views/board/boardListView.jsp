@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.mybatis.board.model.vo.Board"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +9,6 @@
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp" />
-
 
 	<div class="outer">
 		<br>
@@ -28,7 +26,7 @@
 			</thead>
 			<tbody>
 			<c:forEach var="b" items="${list}">
-			<tr>
+			<tr style="color:white;">
 				<td>${b.boardNo}</td>
 				<td><a href="detail.bo?bno=${b.boardNo}">${b.boardTitle}</a></td>
 				<td>${b.boardWriter}</td>
@@ -37,6 +35,13 @@
 			</c:forEach>
 			</tbody>
 		</table>
+		<br><br>
+
+		<c:if test="${!empty loginUser}">
+			<div align="center">
+				<button type="button" onclick="location.href='enrollForm.bo'">새 글 작성</button>
+			</div>
+		</c:if>
 	</div>
 
 </body>

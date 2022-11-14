@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardMapper">
+
+	<resultMap type="board" id="boardResultSet">
+	<result column="BOARD_NO" property="boardNo"/>
+	<result column="BOARD_TITLE" property="boardTitle"/>
+	<result column="USER_ID" property="boardWriter"/>
+	<result column="COUNT" property="count"/>
+	<result column="CREATE_DATE" property="createDate"/>
+	<result column="BOARD_CONTENT" property="boardContent"/>
+	<result column="STATUS" property="status"/>
+	</resultMap>
+	
+	<resultMap type="reply" id="replyResultSet">
+		<result column="REPLY_NO" property="replyNo"/>
+		<result column="REPLY_CONTENT" property="replyContent"/>
+		<result column="REF_BNO" property="refBno"/>
+		<result column="REPLY_WRITER" property="replyWriter"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="STATUS" property="status"/>
+	</resultMap>
+	
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM BOARD
+		WHERE STATUS = 'Y'
+	</select>
+
+	<select id="selectList" resultMap="boardResultSet">
+		SELECT BOARD_NO,
+			   BOARD_TITLE,
+			   USER_ID,
+			   COUNT,
+			   CREATE_DATE
+		FROM   BOARD B
+		JOIN   MEMBER ON(BOARD_WRITER = USER_NO)
+		WHERE  B.STATUS = 'Y'
+		ORDER BY BOARD_NO DESC
+	</select>
+
+	<update id="increaseCount" parameterType="_int">
+		UPDATE BOARD
+		SET COUNT = COUNT + 1
+		WHERE BOARD_NO = #{boardNo}
+		AND STATUS = 'Y'
+	</update>
+	
+	<select id="selectBoard" parameterType="_int" resultMap="boardResultSet">
+		SELECT BOARD_NO,
+			   BOARD_TITLE,
+			   BOARD_CONTENT,
+			   USER_ID,
+			   COUNT,
+			   CREATE_DATE
+		FROM   BOARD B
+		JOIN   MEMBER ON (USER_NO = BOARD_WRITER)
+		WHERE  BOARD_NO = #{boardNo}
+		AND    B.STATUS = 'Y'
+	</select>
+	
+	<select id="selectReplyList" parameterType="_int" resultMap="replyResultSet">
+		SELECT REPLY_NO,
+			   USER_ID "REPLY_WRITER",
+			   REPLY_CONTENT,
+			   CREATE_DATE
+	    FROM   REPLY R
+	    JOIN   MEMBER ON (USER_NO = REPLY_WRITER)
+	    WHERE  REF_BNO = ${boardNo}
+		AND    R.STATUS = 'Y'
+	</select>
+	
+	<insert id="insertBoard" parameterMap="board">
+	INSERT INTO BOARD (BOARD_NO,
+					   BOARD_TITLE,
+					   BOARD_CONTENT,
+					   BOARD_WRITER)
+	VALUES (SEQ_BNO.NEXTVAL,
+			#{boardTitle},
+			#{boardContent},
+			#{boardWriter})
+	</insert>
+</mapper>

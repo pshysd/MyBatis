@@ -52,8 +52,8 @@
     <br>
     
     <div class="login-area" align="right">
-    <c:choose>
-        <c:when test="${empty loginUser}">
+        <c:choose>
+            <c:when test="${empty loginUser}">
             <!-- 로그인 전에 보여지는 로그인 폼 -->
             <!-- 
             	현재 나의 url: http://localhost:8888/my/
@@ -62,48 +62,45 @@
             	절대경로: /my/login.me
             	상대경로: login.me
             -->
-            <form action="login.me" method="post">
-            <table>
-                <tr>
-                    <td>아이디</td>
-                    <td><input type="text" name="userId" required> </td>
-                    <td rowspan="2">
-                        <button type="submit" style="height:50px">로그인</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>비밀번호</td>
-                    <td><input type="text" name="userPwd" required></td>
-                </tr>
-                <tr>
-                    <td colspan="3" align="center">
-                        <a href="enrollForm.me">회원가입</a> |
-                        <a href="">ID / 비밀번호 찾기</a>
-                    </td>
-                </tr>
-            </table>
-            </form>
-        </div>
-        </c:when>
-        <c:otherwise>
+                <form action="login.me" method="post">
+                    <table>
+                        <tr>
+                            <td>아이디</td>
+                            <td><input type="text" name="userId" required> </td>
+                            <td rowspan="2"><button type="submit" style="height:50px">로그인</button></td>
+                        </tr>
+                        <tr>
+                            <td>비밀번호</td>
+                            <td><input type="text" name="userPwd" required></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" align="center">
+                                <a href="enrollForm.me">회원가입</a> |
+                                <a href="">ID / 비밀번호 찾기</a>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </c:when>
+            <c:otherwise>
             <!-- 로그인 후에 보여지는 프로필 화면 -->
-            <div>
-                <table>
-                    <tr>
-                        <td colspan="2">
-                            <h3>${loginUser.userName}님 환영합니다.</h3>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><a href="">마이페이지</a></td>
-                        <td><a href="">로그아웃</a></td>
-                    </tr>
-                </table>
-            </div>
-        </c:otherwise>
-    </c:choose>
-    <br>
-    
+                <div>
+                    <table>
+                        <tr>
+                            <td colspan="2">
+                                <h3>${loginUser.userName}님 환영합니다.</h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="">마이페이지</a></td>
+                            <td><a href="logout.me">로그아웃</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </c:otherwise>
+        </c:choose>
+        <br>
+    </div>
     <div class="nav-area" align="center">
        <div class="menu">HOME</div>
        <div class="menu">공지사항</div>
