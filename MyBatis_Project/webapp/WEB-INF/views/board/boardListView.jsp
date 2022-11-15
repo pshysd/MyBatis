@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp" />
@@ -14,7 +15,56 @@
 		<br>
 		<h1 align="center">게시판</h1>
 		<br>
-		<table align="center" border="1">
+
+		<!--
+			검색 기능 구현 시 동적 SQL을 사용하는 경우
+			* MYBATIS의 동적 쿼리 (동적SQL) -> 상황에 따라 분기 처리를 통해 SQL문을 동적으로 구성
+											   문법은 JSTL 문법과 유사함
+
+		<div id="search_area" align="center">
+			<form action="search.bo" method="get">
+				<input type="hidden" name="currentPage" value="1">
+				<select name="condition">
+					<option value="writer">작성자</option>
+					<option value="title">제목</option>
+					<option value="content">내용</option>
+				</select>
+				<input type="text" name="keyword">
+				<button type="submit">검색</button>
+			</form>
+		</div>
+		-->
+
+		<%--
+			검색 기능 구현 시 정적 바인딩을 사용하는 경우
+			* MYBATIS의 동적 바인딩 -> #{}: 문자열의 경우 양 사이드에 홑따옴표가 붙어서 구멍이 메꿔짐
+						정적 바인딩 -> ${}: 문자열의 경우 양 사이드에 홑따옴표가 붙지 않고 구멍이 메꿔짐
+											보안에 상당히 취약한 방식 (권장되지는 않음)
+		--%>
+		<div id="search_area" align="center">
+			<form action="search.bo" method="get">
+				<input type="hidden" name="currentPage" value="1">
+				<select name="condition">
+					<option value="USER_ID">작성자</option>
+					<option value="BOARD_TITLE">제목</option>
+					<option value="BOARD_CONTENT">내용</option>
+				</select>
+				<input type="text" name="keyword">
+				<button type="submit">검색</button>
+			</form>
+		</div>
+
+		<c:if test="${!empty condition}">
+			<script>
+				$(() => {
+					$('#search-area option[value=${condition}]').attr('selected',true);
+				})
+			</script>
+		</c:if>
+
+		<br>
+		
+		<table align="center" border="1" id="list-area">
 			<thead>
 				<tr>
 					<th>글번호</th>
@@ -42,6 +92,41 @@
 				<button type="button" onclick="location.href='enrollForm.bo'">새 글 작성</button>
 			</div>
 		</c:if>
+		
+			<div id="paging-area" align="center">
+		<c:if test="${pi.currentPage ne 1}">
+			<c:choose>
+				<c:when test="${empty condition}">
+					<a href="list.bo?currentPage=${pi.currentPage - 1}">[이전]</a>
+				</c:when>
+				<c:otherwise>
+					<a href="search.bo?currentPage=${pi.currentPage -1}&condition=${condition}&keyword=${keyword}">[이전]</a>
+				</c:otherwise>
+			</c:choose>
+		</c:if>
+
+		<c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}" step="1">
+			<c:choose>
+				<c:when test="${empty condition}"> <!-- 전체 조회 -->
+					<a href="list.bo?currentPage=${p}">${p}</a>
+				</c:when>
+				<c:otherwise> <!-- 검색 조회: search.bo로 페이지 이동 -->
+					<a href="search.bo?currentPage=${p}&condition=${condition}&keyword=${keyword}">[${p}]</a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+
+		<c:if test="${pi.currentPage ne pi.maxPage}">
+			<c:choose>
+				<c:when test="${empty condition}">
+					<a href="list.bo?currentPage=${pi.currentPage + 1}">[다음]</a>
+				</c:when>
+				<c:otherwise>
+					<a href="search.bo?currentPage=${pi.currentPage + 1}&condition=${condition}&keyword=${keyword}">[다음]</a>
+				</c:otherwise>
+			</c:choose>
+		</c:if>
+	</div>
 	</div>
 
 </body>

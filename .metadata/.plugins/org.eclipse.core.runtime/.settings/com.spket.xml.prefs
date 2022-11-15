@@ -1,10 +1,10 @@
 eclipse.preferences.version=1
-overriddenByCSS=,xml_doctype,xml_task_tag,xml_tags,xml_default,xml_comments,xml_attr_value,xml_proc_instr,xml_cdata,
-xml_attr_value=51,51,51
+overriddenByCSS=,xml_default,xml_proc_instr,xml_cdata,xml_doctype,xml_task_tag,xml_tags,xml_comments,xml_attr_value,
+xml_attr_value=0,128,0
 xml_cdata=0,0,0
-xml_comments=51,68,102
+xml_comments=128,128,128
 xml_default=0,0,0
-xml_doctype=92,129,152
+xml_doctype=0,0,0
 xml_proc_instr=0,0,0
-xml_tags=92,129,152
-xml_task_tag=102,102,102
+xml_tags=0,0,0
+xml_task_tag=0,0,255

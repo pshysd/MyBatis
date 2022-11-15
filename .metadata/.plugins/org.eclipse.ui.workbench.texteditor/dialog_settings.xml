@@ -4,8 +4,9 @@
 		<item key="casesensitive" value="true"/>
 		<item key="wholeword" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="insert"/>
+		<item key="selection" value="ㅋㅋ"/>
 		<list key="findhistory">
+			<item value="ㅋㅋ"/>
 			<item value="insert"/>
 			<item value="typealias"/>
 			<item value="y_d"/>
